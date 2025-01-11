@@ -44,6 +44,12 @@ int db_modify(Database *db, Movie new_movie);
 
 /**
  *
+ * @brief Retrieves a movie from the database
+ */
+Movie db_get(Database *db, int id);
+
+/**
+ *
  * @brief Commits the current changes in the database
  * @returns The amount of lines written or -1 on error
  */
