@@ -1,20 +1,29 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "db.h"
-#include "ux.h"
+void ux_display() {
 
-#define DB_FNAME "db.csv"
+}
+
+void ux_add() {
+
+}
+
+void ux_delete() {
+
+}
+
+void ux_edit() {
+
+}
+
+void ux_error() {
+
+}
 
 
 int main(void) {
     int choice;
-
-    Database db = db_init(DB_FNAME);
-    if (db.movies == NULL) {
-        fprintf(stderr, "Error setting up database");
-        return EXIT_FAILURE;
-    }
 
     do {
         printf("****Welcome to my final project****\n");
@@ -29,26 +38,26 @@ int main(void) {
 
         switch (choice) {
             case 1:
-                ux_display(&db);
+                ux_display();
                 break;
             case 2:
-                ux_add(&db);
+                ux_add();
                 break;
             case 3:
-                ux_delete(&db);
+                ux_delete();
                 break;
             case 4:
-                ux_edit(&db);
+                ux_edit();
                 break;
             case 5:
                 break;
             default:
-                ux_error(&db, choice);
+                ux_error();
                 break;
         }
     } while (choice != 5);
 
-    db_commit(&db, DB_FNAME);
-
     return EXIT_SUCCESS;
 }
+
+
