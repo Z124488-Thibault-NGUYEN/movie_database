@@ -47,7 +47,7 @@ int db_modify(Database *db, Movie new_movie);
  * @brief Commits the current changes in the database
  * @returns The amount of lines written or -1 on error
  */
-int db_commit(Database *db);
+int db_commit(Database *db, char *filename);
 
 /**
  * @brief Indicates that a DB should not be used.

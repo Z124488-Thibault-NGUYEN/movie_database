@@ -35,7 +35,7 @@ int main(void) {
                 ux_add(&db);
                 break;
             case 3:
-                ux_add(&db);
+                ux_delete(&db);
                 break;
             case 4:
                 ux_edit(&db);
@@ -47,6 +47,8 @@ int main(void) {
                 break;
         }
     } while (choice != 5);
+
+    db_commit(&db, DB_FNAME);
 
     return EXIT_SUCCESS;
 }

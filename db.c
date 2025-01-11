@@ -1,5 +1,6 @@
 #include "db.h"
 #include "types.h"
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -91,7 +92,13 @@ int db_modify(Database *db, Movie new_movie) {
     return new_movie.id;
 }
 
-int db_commit(Database *db) {
+int db_commit(Database *db, char *fname) {
+    FILE *file = fopen(fname, "w");
+    if (file == NULL) {
+        perror("Error opening file");
+        return -1;
+    }
+
     return 0;
 }
 
