@@ -6,7 +6,7 @@
 #define max_line_length 256
 
 void display_movies(const char* filename) {
-    FILE* file = fopen(filename, "r");
+    FILE *file=fopen("movie.csv", "r");
     if (file == NULL) {
         fprintf(stderr, "Error: Could not open file.\n");
         return;
