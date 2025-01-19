@@ -14,7 +14,7 @@ void display_movies(const char* filename) {
 
     char line[MAX_LINE_LENGTH];
 
-    // Skip the header line
+    
     fgets(line, MAX_LINE_LENGTH, file);
 
     printf("ID\tYear\tTitle\t\t\t\tOrigin\t\tGenre\t\tDirector\n");
