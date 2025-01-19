@@ -13,8 +13,7 @@ void ux_display() {
     }
 
     char line[max_line_length];
-
-    
+    // Skip the header line
     fgets(line, max_line_length, file);
 
     printf("ID\tYear\tTitle\t\t\t\tOrigin\t\tGenre\t\tDirector\n");
@@ -61,7 +60,7 @@ void ux_add() {
     if (rfile == NULL)
         {
         printf("Error");
-        return 1;
+        return;
         }
     while (fgets(movie[id], max_line_length, rfile) != NULL)
         {
@@ -144,7 +143,7 @@ void ux_edit() {
     if (rfile == NULL) 
     {
         printf("Error");
-        return 1;
+        return;
     }
     char movie[max_lines][max_line_length];
     int id = 0;
