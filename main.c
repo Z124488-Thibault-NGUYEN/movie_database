@@ -22,16 +22,16 @@ void ux_display() {
 
     fgets(line, sizeof(line), file);
 
-    printf("ID   Year   Title                      Origin          Genre           Director\n");
-    printf("---- ------ ------------------------- --------------- --------------- --------------------\n");
+    printf("ID\tYear\tTitle\t\t\t\tOrigin\t\tGenre\t\tDirector\n");
+    printf("------------------------------------------------------------------------------------------------------------------\n");
 
-    while (fgets(line, sizeof(line), file)) {
+    while (fgets(line, MAX_LINE_LENGTH, file) != NULL) {
         int id, year;
         char title[50], origin[50], genre[50], director[50];
 
         if (sscanf(line, "%d,%d,%49[^,],%49[^,],%49[^,],%49[^\n]",
                     &id, &year, title, origin, genre, director) == 6) {
-            printf("%-4d %-6d %-25s %-15s %-15s %-20s\n",
+            printf("%-4d\t%-6d\t%-30s\t%-15s\t%-15s\t%-20s\n",
                     id, year, title, origin, genre, director);
         }
     }
