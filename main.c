@@ -35,79 +35,85 @@ void ux_display() {
 }
 
 void ux_add() {
-    FILE *file=fopen("movie.csv", "a");
+    int new_id, id=0;
+	char movie[max_lines][max_line_length];
+	char year[50];
+    printf("Enter the publication year of the new movie\n");
+    scanf("%s", year);
 
-    char title[50];
+	char title[50];
     printf("Enter the title of the new movie\n");
     scanf("%s", title);
-
-    char author[50];
-    printf("Enter the author of the new movie\n");
-    scanf("%s", author);
-
+	
     char nationality[50];
     printf("Enter the nationality of the new movie\n");
     scanf("%s", nationality);
 
-    char year[50];
-    printf("Enter the publication year of the new movie\n");
-    scanf("%s", year);
-
     char type[50];
     printf("Enter the type of the new movie\n");
     scanf("%s", type);
-
-
-    fprintf(file, "%d, %s, %s, %s, %s, %s",
-            line()+1, year, title, nationality, type, author);
-
-    fclose(file);
-
-    printf("Movie added successfully\n");
-}
-
-void ux_delete() {
-
-    int y, x, i, id_max;
-    printf("Enter the ID of the movie\n");
-    scanf("%d", &x);
-    FILE *rfile = fopen("movie.csv","r");
+	
+    char author[50];
+    printf("Enter the author of the new movie\n");
+    scanf("%s", author);
+    
+	FILE *rfile = fopen("movie.csv","r");
     if (rfile == NULL)
-    {
+        {
         printf("Error");
         return 1;
-    }		
-    char movie[max_lines][max_line_length];
-    int id = 0;
-
+        }
     while (fgets(movie[id], max_line_length, rfile) != NULL)
-    {
+        {
         id++;
-    }
+        }
     fclose(rfile);
+	
+    char *new_id_c;
+	new_id_c = strtok(movie[id-1],",");
+    new_id = atoi(new_id_c) + 1;
+		
+	FILE *afile=fopen("movie.csv", "a");			
+	fprintf(afile, "\n%d, %s, %s, %s, %s, %s", new_id, year, title, nationality, type, author);
+    fclose(afile);		
+	}
 
-    id_max = line();
+void ux_delete() {
+    int id=0, id_remove, i, id_rank_i, jump;
+	char movie[max_lines][max_line_length];
+	char movie_copy[max_lines][max_line_length];
+	char *id_rank_c;
 
-    FILE *wfile = fopen("movie.csv", "w");
+	printf("Enter the ID of the movie\n");
+    scanf ("%d", &id_remove);
 
-    while(i<x)
-    {
-        fputs(movie[i], wfile);
-        i++;
+	FILE *rfile = fopen ("movie.csv", "r");
+    while (fgets(movie[id], max_line_length, rfile) != NULL)
+		{
+		id++;
+		}
+	fclose(rfile);
+	
+	for (i=0; i<id; i++)
+        {
+		strcpy(movie_copy[i], movie[i]);
+		id_rank_c = strtok(movie[i],",");
+		id_rank_i = atoi(id_rank_c);
+        if (id_rank_i==id_remove)
+    		{
+			jump = i;
+            }
+        }
+	FILE *wfile = fopen ("movie.csv", "w");
+	for (i=0; i<id; i++)
+		{
+		if (i!=jump)
+    		{
+			fputs(movie_copy[i], wfile);
+            }
+		}
+	fclose(wfile);
     }
-    for(i=x+1;i< id_max; i++)
-    {
-        char *start, *end;
-        char data[100]="";
-        start = strchr(movie[i], ',');
-        end = strchr(start+1, '\n');
-        int number = end - start - 1;
-        strncpy(data, start+1, number);
-        fprintf(wfile, "%d,%s\n", i-1, data);
-    }
-
-    fclose(wfile);
-}
 
 void ux_edit() {
     int x;
