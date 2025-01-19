@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
-int line();
+#include <string.h>
+
+#define max_lines 100
+#define max_line_length 256
 
 void ux_display() {
     FILE *file = fopen("movie.csv", "r");
