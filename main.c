@@ -9,23 +9,27 @@ void ux_display() {
         return;
     }
 
-    char line[256];
+    char line[max_line_length];
     int line_count = 0;
 
-    
-    printf("ID   Year   Title                      Origin          Genre           Director\n");
+    while (fgets(line, sizeof(line), file)) {
+        line_count++;
+    }
+    rewind(file); 
+
+    fgets(line, sizeof(line), file);
+
+    printf("ID   Year   Title                      Origin          Genre           Director\n");
     printf("---- ------ ------------------------- --------------- --------------- --------------------\n");
 
     while (fgets(line, sizeof(line), file)) {
         int id, year;
         char title[50], origin[50], genre[50], director[50];
 
-  ID,Year,Title,Origin,Genre,Director)
-        if (sscanf(line, "%d, %d, %49[^,], %49[^,], %49[^,], %49[^\n]", 
-                   &id, &year, title, origin, genre, director) == 6) {
-            printf("%-4d %-6d %-25s %-15s %-15s %-20s\n", 
-                   id, year, title, origin, genre, director);
-            line_count++;
+        if (sscanf(line, "%d,%d,%49[^,],%49[^,],%49[^,],%49[^\n]",
+                    &id, &year, title, origin, genre, director) == 6) {
+            printf("%-4d %-6d %-25s %-15s %-15s %-20s\n",
+                    id, year, title, origin, genre, director);
         }
     }
 
@@ -35,7 +39,6 @@ void ux_display() {
         printf("No movies available.\n");
     }
 }
-
 
 void ux_add() {
     FILE *file=fopen("movie.csv", "a");
