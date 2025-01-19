@@ -5,22 +5,22 @@
 #define max_lines 100
 #define max_line_length 256
 
-void display_movies(const char* filename) {
+void display_movies() {
     FILE *file=fopen("movie.csv", "r");
     if (file == NULL) {
         fprintf(stderr, "Error: Could not open file.\n");
         return;
     }
 
-    char line[MAX_LINE_LENGTH];
+    char line[max_line_length];
 
     
-    fgets(line, MAX_LINE_LENGTH, file);
+    fgets(line, max_line_length, file);
 
     printf("ID\tYear\tTitle\t\t\t\tOrigin\t\tGenre\t\tDirector\n");
     printf("------------------------------------------------------------------------------------------------------------------\n");
 
-    while (fgets(line, MAX_LINE_LENGTH, file) != NULL) {
+    while (fgets(line, max_line_length, file) != NULL) {
         int id, year;
         char title[50], origin[50], genre[50], director[50];
 
