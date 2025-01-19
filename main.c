@@ -3,14 +3,39 @@
 int line();
 
 void ux_display() {
-    FILE *file=fopen("movie.csv", "r");
-    int c;
-    while ((c=fgetc(file))!=EOF)
-    {
-        putchar(c);
+    FILE *file = fopen("movie.csv", "r");
+    if (file == NULL) {
+        printf("Error: Could not open file.\n");
+        return;
     }
+
+    char line[256];
+    int line_count = 0;
+
+    
+    printf("ID   Year   Title                      Origin          Genre           Director\n");
+    printf("---- ------ ------------------------- --------------- --------------- --------------------\n");
+
+    while (fgets(line, sizeof(line), file)) {
+        int id, year;
+        char title[50], origin[50], genre[50], director[50];
+
+  ID,Year,Title,Origin,Genre,Director)
+        if (sscanf(line, "%d, %d, %49[^,], %49[^,], %49[^,], %49[^\n]", 
+                   &id, &year, title, origin, genre, director) == 6) {
+            printf("%-4d %-6d %-25s %-15s %-15s %-20s\n", 
+                   id, year, title, origin, genre, director);
+            line_count++;
+        }
+    }
+
     fclose(file);
+
+    if (line_count == 0) {
+        printf("No movies available.\n");
+    }
 }
+
 
 void ux_add() {
     FILE *file=fopen("movie.csv", "a");
