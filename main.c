@@ -5,22 +5,17 @@
 #define max_lines 100
 #define max_line_length 256
 
-void ux_display() {
-    FILE *file = fopen("movie.csv", "r");
+void display_movies(const char* filename) {
+    FILE* file = fopen(filename, "r");
     if (file == NULL) {
-        printf("Error: Could not open file.\n");
+        fprintf(stderr, "Error: Could not open file.\n");
         return;
     }
 
-    char line[max_line_length];
-    int line_count = 0;
+    char line[MAX_LINE_LENGTH];
 
-    while (fgets(line, sizeof(line), file)) {
-        line_count++;
-    }
-    rewind(file); 
-
-    fgets(line, sizeof(line), file);
+    // Skip the header line
+    fgets(line, MAX_LINE_LENGTH, file);
 
     printf("ID\tYear\tTitle\t\t\t\tOrigin\t\tGenre\t\tDirector\n");
     printf("------------------------------------------------------------------------------------------------------------------\n");
@@ -37,10 +32,6 @@ void ux_display() {
     }
 
     fclose(file);
-
-    if (line_count == 0) {
-        printf("No movies available.\n");
-    }
 }
 
 void ux_add() {
