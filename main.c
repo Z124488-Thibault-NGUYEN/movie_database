@@ -184,7 +184,10 @@ int main(void) {
         printf("5. Exit\n");
 
         printf("Enter your choice: ");
-        scanf("%d", &choice);
+
+        if (scanf("%d", &choice) != 1) {
+            continue;
+        }
 
         switch (choice) {
             case 1:
