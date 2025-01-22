@@ -3,8 +3,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_LINES 100
+#define MAX_LINES 256
 #define MAX_LINE_LENGTH 256
+#define SUBSTITUTE_CHAR ';'
 
 /******************************************************
  * HELPER FUNCTIONS
@@ -17,6 +18,15 @@ static void safe_read_line(char *buffer, size_t size) {
         char *newline_ptr = strchr(buffer, '\n');
         if (newline_ptr) {
             *newline_ptr = '\0';
+        } else {
+            int ch;
+            while ((ch = getchar()) != '\n' && ch != EOF);
+        }
+
+        for (char *ptr = buffer; *ptr; ++ptr) {
+            if (*ptr == ',') {
+                *ptr = SUBSTITUTE_CHAR;
+            }
         }
     }
     else {
