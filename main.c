@@ -93,7 +93,7 @@ void ux_display() {
              * Truncated printing:
              *   - ID: 4 wide
              *   - Year: 6 wide
-             *   - Title: 25 wide (truncate if longer)
+             *   - Title: 35 wide (truncate if longer)
              *   - Origin: 15 wide (truncate if longer)
              *   - Genre: 10 wide (truncate if longer)
              *   - Director: 15 wide (truncate if longer)
