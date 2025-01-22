@@ -78,7 +78,7 @@ void ux_display() {
 
     // Print a header for our table display
     printf("ID   Year   Title                               Origin          Genre       Director\n");
-    printf("----------------------------------------------------------------------------\n");
+    printf("------------------------------------------------------------------------------------\n");
 
     // Read remaining lines (actual movie data)
     while (fgets(line, sizeof(line), file)) {
@@ -276,15 +276,6 @@ void ux_edit() {
     int year;
     char title[50], author[50], nationality[50], type[50];
 
-    printf("Enter the new title: ");
-    safe_read_line(title, sizeof(title));
-
-    printf("Enter the new director: ");
-    safe_read_line(author, sizeof(author));
-
-    printf("Enter the new nationality: ");
-    safe_read_line(nationality, sizeof(nationality));
-
     printf("Enter the new publication year: ");
     if (scanf("%d", &year) != 1 || year < 0 || year > 9999) {
         fprintf(stderr, "Failed to parse year.\n");
@@ -294,8 +285,17 @@ void ux_edit() {
     }
     while (getchar() != '\n'); // consume leftover newline
 
+    printf("Enter the new title: ");
+    safe_read_line(title, sizeof(title));
+
+    printf("Enter the new origin: ");
+    safe_read_line(nationality, sizeof(nationality));
+
     printf("Enter the new genre: ");
     safe_read_line(type, sizeof(type));
+
+    printf("Enter the new director: ");
+    safe_read_line(author, sizeof(author));
 
     FILE *rfile = fopen("movie.csv", "r");
     if (!rfile) {
